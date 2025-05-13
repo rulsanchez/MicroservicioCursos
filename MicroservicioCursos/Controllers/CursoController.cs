@@ -1,4 +1,6 @@
-﻿using MicroservicioCursos.Data;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using MicroservicioCursos.Data;
 using MicroservicioCursos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,8 +32,20 @@ namespace MicroservicioCursos.Controllers
 
         {
             var curso = await _dbContext.Cursos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (curso == null)
+                return NotFound("Curso no encontrado");
+
             return Ok(curso);
 
         }
+
+
+
+
+      
+
+
+
     }
 }
